@@ -49,7 +49,17 @@ describe('TweetWall', () => {
     expect(wrapper.state()).to.deep.equal({ tweets: ['I am a tweet!'] });
   });
 
-  
+  it('updates the state to incorporate new tweets', () => {
+    const wrapper = shallow(<TweetWall newTweets={['I am a tweet!']} />);
+    wrapper.setProps({ newTweets: ['I am also a tweet!'] });
+    expect(wrapper.state()).to.deep.equal({ tweets: ['I am also a tweet!', 'I am a tweet!'] });
+  });
+
+  it('updates the state to incorporate new tweets', () => {
+    const wrapper = shallow(<TweetWall newTweets={['I am a tweet!']} />);
+    wrapper.setProps({ newTweets: ['I am also a tweet!'] });
+    expect(wrapper.state()).deep.equal({ tweets: ['I am also a tweet!', 'I am a tweet!'] });
+  });
 
   it('does not rerender when there are no new tweets', () => {
     const spy = sinon.spy(TweetWall.prototype, 'render')
